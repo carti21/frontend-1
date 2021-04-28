@@ -14,7 +14,8 @@ jest.mock('../../../../lib/detect', () => ({
     getViewport: jest.fn(),
 }));
 
-describe('Cross-frame messenger: scroll', () => {
+// This is a flaky test that fails very often! @mxdvl 2021-04-28
+describe.skip('Cross-frame messenger: scroll', () => {
     let iframe1 = {};
     let iframe2 = {};
     let onScroll = () => Promise.resolve();
@@ -72,8 +73,7 @@ describe('Cross-frame messenger: scroll', () => {
         }
     });
 
-    // This is a flaky test that fails very often! @mxdvl 2021-04-28
-    describe.skip('With IntersectionObserver', () => {
+    describe('With IntersectionObserver', () => {
         let onIntersect = null;
         class IntersectionObserver {
             constructor(callback) {
