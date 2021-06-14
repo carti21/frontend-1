@@ -1,0 +1,536 @@
+# Query: config\\.get
+# Flags: RegExp
+# Including: static/src/javascripts/**/commercial
+# Excluding: *.spec.*
+# ContextLines: 1
+
+152 results - 45 files
+
+static/src/javascripts/projects/commercial/commercial-metrics.ts:
+  11  
+  12: const isDev = Boolean(config.get('page.isDev', false));
+  13  
+
+  15  	if (!window.guardian.ophan) return;
+  16: 	if (!config.get('switches.commercialMetrics', false)) return;
+  17  
+
+  19  	const pageViewId = window.guardian.ophan.pageViewId;
+  20: 	const browserId = config.get('ophan.browserId') as string | undefined;
+  21  
+
+static/src/javascripts/projects/commercial/sentinel.ts:
+  27  	// The function will return early if the sentinelLogger switch is disabled.
+  28: 	if (!config.get('switches.sentinelLogger', false)) return;
+  29  
+
+static/src/javascripts/projects/commercial/modules/article-aside-adverts.ts:
+  74  			// we do all the adjustments server-side if the page has a ShowcaseMainElement!
+  75: 			if (config.get('page.hasShowcaseMainElement', false)) {
+  76  				return adSlotsWithinRightCol[0];
+
+  80  			// the page the first immersive image appears.
+  81: 			if (config.get('page.isImmersive') && immersiveEls.length > 0) {
+  82  				return fastdom.mutate(() => {
+
+static/src/javascripts/projects/commercial/modules/article-body-adverts.js:
+   15  
+   16: const isPaidContent = config.get('page.isPaidContent', false);
+   17  
+
+   68  
+   69: const isDotcomRendering = config.get('isDotcomRendering', false);
+   70  const articleBodySelector = isDotcomRendering ? '.article-body-commercial-selector' : '.js-article__body';
+
+   72  const addDesktopInlineAds = (isInline1) => {
+   73:     const isImmersive = config.get('page.isImmersive');
+   74      const defaultRules = {
+
+  252  
+  253:     const im = config.get('page.hasInlineMerchandise')
+  254          ? attemptToAddInlineMerchAd()
+
+static/src/javascripts/projects/commercial/modules/brazeBanner.js:
+  182  
+  183:     const brazeSwitch = config.get('switches.brazeSwitch');
+  184:     const apiKey = config.get('page.brazeApiKey');
+  185      const isBrazeConfigured = brazeSwitch && apiKey;
+
+  198      // Don't load Braze SDK for paid content
+  199:     if (config.get('page').isPaidContent) {
+  200          return false;
+
+static/src/javascripts/projects/commercial/modules/carrot-traffic-driver.ts:
+  50  
+  51: const isDotcomRendering = config.get('isDotcomRendering', false) as boolean;
+  52  const bodySelector = isDotcomRendering
+
+static/src/javascripts/projects/commercial/modules/comment-adverts.ts:
+  42  				if (
+  43: 					!config.get('page.isLiveBlog') &&
+  44: 					!config.get('page.isMinuteArticle')
+  45  				) {
+
+static/src/javascripts/projects/commercial/modules/comscore.js:
+  38          window._comscore.push(
+  39:             getGlobals(!!state, config.get('page.keywords', ''))
+  40          );
+
+static/src/javascripts/projects/commercial/modules/high-merch.js:
+   7      if (commercialFeatures.highMerch) {
+   8:         const anchorSelector = config.get('page.commentable')
+   9              ? '#comments + *'
+
+  15          const slots = createSlots(
+  16:             config.get('page.isPaidContent') ? 'high-merch-paid' : 'high-merch'
+  17          );
+
+static/src/javascripts/projects/commercial/modules/ipsos-mori.js:
+  18      };
+  19:     const ipsosSource = `https://uk-script.dotmetrics.net/door.js?d=${  document.location.host  }&t=${ config.get('page.ipsosTag')}`;
+  20  
+
+static/src/javascripts/projects/commercial/modules/mobile-sticky.js:
+  24  const createAdWrapper = () => {
+  25:     if (!config.get('isDotcomRendering', false)) {
+  26          return createAdWrapperClassic();
+
+static/src/javascripts/projects/commercial/modules/sticky-mpu.js:
+  70      // Fixes overlapping ad issue on liveblogs by Setting to max ad height.
+  71:     const stickyPixelBoundary = config.get('page.isLiveBlog') ? 600 : 300;
+  72  
+
+  75          !adSlot ||
+  76:         config.get('page.hasShowcaseMainElement')
+  77      ) {
+
+  90                  // if there is a sticky 'paid by' band move the sticky mpu down so it will be always visible
+  91:                 const options = config.get('page.isPaidContent')
+  92                      ? {
+
+static/src/javascripts/projects/commercial/modules/third-party-tags.js:
+  82      const advertisingServices = [
+  83:         remarketing({ shouldRun: config.get('switches.remarketing', false) }),
+  84:         permutive({ shouldRun: config.get('switches.permutive', false) }),
+  85:         ias({ shouldRun: config.get('switches.iasAdTargeting', false) }),
+  86:         inizio({ shouldRun: config.get('switches.inizio', false) }),
+  87          fbPixel({
+  88:             shouldRun: config.get('switches.facebookTrackingPixel', false),
+  89          }),
+  90:         twitter({ shouldRun: config.get('switches.twitterUwt', false) }),
+  91      ].filter(_ => _.shouldRun);
+
+static/src/javascripts/projects/commercial/modules/ad-verification/prepare-ad-verification.js:
+  12  
+  13:     if (config.get('switches.confiantAdVerification')) {
+  14          return loadScript(
+
+static/src/javascripts/projects/commercial/modules/creatives/page-skin.js:
+   8      const bodyEl = document.body;
+   9:     const hasPageSkin = config.get('page.hasPageSkin');
+  10:     const isInAUEdition = config.get('page.edition', '').toLowerCase() === 'au';
+  11      const adLabelHeight = 24;
+
+static/src/javascripts/projects/commercial/modules/dfp/create-slots.js:
+  156      // 3562dc07-78e9-4507-b922-78b979d4c5cb
+  157:     if (config.get('isDotcomRendering', false) && name === 'top-above-nav') {
+  158          // This is to prevent a problem that appeared with DCR.
+
+static/src/javascripts/projects/commercial/modules/dfp/define-slot.js:
+    8      return urlVars['ad-unit']
+    9:         ? `/${config.get('page.dfpAccountId')}/${urlVars['ad-unit']}`
+   10:         : config.get('page.adUnit');
+   11  });
+
+  115       */
+  116:     if (config.get('switches.iasAdTargeting', false)) {
+  117  
+
+  196      }
+  197:     const isBn = config.get('page.isbn');
+  198  
+
+  212  
+  213:     if (config.get('switches.adomik')) {
+  214          slot.setTargeting('ad_group', adomikClassify());
+
+static/src/javascripts/projects/commercial/modules/dfp/fill-advert-slots.js:
+  33          const isDCRMobile =
+  34:             config.get('isDotcomRendering', false) &&
+  35              getBreakpoint() === 'mobile'
+
+static/src/javascripts/projects/commercial/modules/dfp/on-slot-render.js:
+  97              !isOutstream &&
+  98:             !config.get('page.hasPageSkin') &&
+  99              !isNonRefreshableLineItem;
+
+static/src/javascripts/projects/commercial/modules/dfp/prepare-a9.js:
+  24              !commercialFeatures.adFree &&
+  25:             !config.get('page.hasPageSkin') &&
+  26              !isGoogleProxy())
+
+static/src/javascripts/projects/commercial/modules/dfp/prepare-permutive.js:
+  184          const permutiveConfig = {
+  185:             user: config.get('user', {}),
+  186:             page: config.get('page', {}),
+  187:             ophan: config.get('ophan', {}),
+  188          };
+
+static/src/javascripts/projects/commercial/modules/dfp/prepare-prebid.js:
+  18          !commercialFeatures.adFree &&
+  19:         !config.get('page.hasPageSkin') &&
+  20          !isGoogleProxy() &&
+
+static/src/javascripts/projects/commercial/modules/dfp/redplanet.js:
+  22              u1: 'theguardian.com',
+  23:             u2: config.get('page.section'),
+  24:             u3: config.get('page.sectionName'),
+  25:             u4: config.get('page.contentType'),
+  26:             uid: config.get('ophan', {}).browserId,
+  27          },
+
+static/src/javascripts/projects/commercial/modules/header-bidding/slot-config.js:
+   35      const isCrossword = contentType === 'Crossword';
+   36:     const hasShowcase = config.get('page.hasShowcaseMainElement', false);
+   37      const hasExtendedMostPop =
+   38:         isArticle && config.get('switches.extendedMostPopular');
+   39  
+
+  117              return shouldIncludeMobileSticky() &&
+  118:                 config.get('switches.mobileStickyPrebid')
+  119                  ? commonSlots.concat([...mobileSlots, mobileStickySlot])
+
+  134          ad,
+  135:         getSlots(config.get('page.contentType', ''))
+  136      );
+
+static/src/javascripts/projects/commercial/modules/header-bidding/utils.js:
+  121  export const shouldUseOzoneAdaptor = () =>
+  122:     !isInUsOrCa() && !isInAuOrNz() && config.get('switches.prebidOzone');
+  123  
+
+  125      isInAuOrNz() ||
+  126:     ((config.get('switches.prebidAppnexusUkRow') && !isInUsOrCa()) ||
+  127          !!pbTestNameMap().and);
+
+  137          window.location.hash.indexOf('#mobile-sticky') !== -1 ||
+  138:         (config.get('switches.mobileStickyLeaderboard') &&
+  139              isBreakpoint({ min: 'mobile', max: 'mobileLandscape' }) &&
+  140              (isInUsOrCa() || isInAuOrNz()) &&
+  141:             config.get('page.contentType') === 'Article' &&
+  142:             !config.get('page.isHosted'))
+  143  );
+
+static/src/javascripts/projects/commercial/modules/header-bidding/a9/a9.js:
+  10          this.slotID = advert.id;
+  11:         this.slotName = config.get('page.adUnit');
+  12          this.sizes = slot.sizes;
+
+  28          window.apstag.init({
+  29:             pubID: config.get('page.a9PublisherId'),
+  30              adServer: 'googletag',
+
+static/src/javascripts/projects/commercial/modules/header-bidding/prebid/appnexus.js:
+   24      const sectionName =
+   25:         config.get('page.section', '') ||
+   26:         config.get('page.sectionName', '').replace(/ /g, '-');
+   27  
+
+   99  export const getAppNexusDirectBidParams = sizes => {
+  100:     if (isInAuOrNz() && config.get('switches.prebidAppnexusInvcode')) {
+  101          const invCode = getAppNexusInvCode(sizes);
+
+static/src/javascripts/projects/commercial/modules/header-bidding/prebid/bid-config.js:
+   40  
+   41: const isArticle = config.get('page.contentType') === 'Article';
+   42  
+
+  289          ({
+  290:                    ad_unit: config.get('page.adUnit'),
+  291                     dom_id: slotId,
+  292                     appNexusTargeting: buildAppNexusTargeting(getPageTargeting()),
+  293:                    pageViewId: config.get('ophan.pageViewId'),
+  294                 })
+
+  395  const biddersSwitchedOn = allBidders => {
+  396:     const isSwitchedOn = bidder => config.get(`switches.${bidder.switchName}`);
+  397      return allBidders.filter(bidder => isSwitchedOn(bidder));
+
+static/src/javascripts/projects/commercial/modules/header-bidding/prebid/prebid.js:
+   31  
+   32:     const userSync = config.get('switches.prebidUserSync', false)
+   33          ? {
+
+   76  
+   77:     if(config.get('switches.consentManagement', false)) {
+   78          pbjsConfig.consentManagement = consentManagement()
+
+   81      if (
+   82: 		config.get('switches.permutive', false) &&
+   83: 		config.get('switches.prebidPermutiveAudience', false)
+   84  	) {
+
+  101  
+  102:     if (config.get('switches.prebidAnalytics', false)) {
+  103          window.pbjs.enableAnalytics([
+
+  106                  options: {
+  107:                     ajaxUrl: config.get('page.ajaxUrl'),
+  108:                     pv: config.get('ophan.pageViewId'),
+  109                  },
+
+  117  
+  118:     if (config.get('switches.prebidXaxis', false)) {
+  119          window.pbjs.bidderSettings.xhb = {
+
+static/src/javascripts/projects/commercial/modules/hosted/gallery.js:
+  182      static ctaIndex() {
+  183:         const ctaIndex = config.get('page.ctaIndex');
+  184:         const images = config.get('page.images');
+  185          return ctaIndex > 0 && ctaIndex < images.length - 1
+
+  350          if (data && data.nav) {
+  351:             const trackingPrefix = config.get('page.trackingPrefix', '');
+  352              interactionTracking.trackNonClickInteraction(
+
+  476              const pageName =
+  477:                 config.get('page.pageName') ||
+  478                  window.location.pathname.substr(
+
+static/src/javascripts/projects/commercial/modules/hosted/next-video.js:
+   9          return fetchJson(
+  10:             `${config.get('page.ajaxUrl')}/${config.get(
+  11                  'page.pageId'
+
+static/src/javascripts/projects/commercial/modules/hosted/youtube.js:
+  127                      shouldAutoplay(
+  128:                         config.get('page', {}),
+  129:                         config.get('switches', {})
+  130                      )
+
+static/src/javascripts/projects/commercial/modules/messenger/background.js:
+   81          // mark: 0bf74539-5466-4907-ae7b-c0d8fc41112d
+   82:         if (config.get('isDotcomRendering', false)) {
+   83              backgroundParent.style.position = 'absolute';
+
+  101                      if (
+  102:                         config.get('isDotcomRendering', false) &&
+  103                          adSlot.firstChild &&
+
+  125  
+  126:                         if (config.get('isDotcomRendering', false)) {
+  127                              background.style.position = 'fixed';
+
+  156          if (
+  157:             config.get('isDotcomRendering', false) &&
+  158              specs.scrollType === 'parallax'
+
+  172                      fastdom.mutate(() => {
+  173:                         if (config.get('isDotcomRendering', false)) {
+  174                              background.style.position = 'fixed';
+
+static/src/javascripts/projects/commercial/modules/messenger/get-page-targeting.js:
+  3  const init = (register) => {
+  4:     register('get-page-targeting', () => config.get('page.sharedAdTargeting'));
+  5  };
+
+static/src/javascripts/projects/commercial/modules/third-party-tags/imr-worldwide-legacy.js:
+  17  export const imrWorldwideLegacy = {
+  18:     shouldRun: config.get('switches.imrWorldwide') && isInAuOrNz(),
+  19      url: '//secure-au.imrworldwide.com/v60.js',
+
+static/src/javascripts/projects/commercial/modules/third-party-tags/imr-worldwide.js:
+  61  const onLoad = () => {
+  62:     const sectionFromMeta = config.get('page.section', '').toLowerCase();
+  63      const subBrandApId =
+
+  81          type: 'static',
+  82:         assetid: config.get('page.pageId'),
+  83          section: sectionRef,
+
+  89  export const imrWorldwide = {
+  90:     shouldRun: config.get('switches.imrWorldwide') && isInAuOrNz(),
+  91      url: '//secure-dcr.imrworldwide.com/novms/js/2/ggcmb510.js',
+
+static/src/javascripts/projects/common/modules/commercial/acquisitions-ophan.js:
+  32          ...acquisitionData,
+  33:         referrerPageviewId: config.get('ophan.pageViewId'),
+  34          referrerUrl: window.location.href.split('?')[0],
+
+  56          const params = {
+  57:             REFPVID: config.get('ophan.pageViewId') || 'not_found',
+  58              INTCMP: campaignCode,
+
+static/src/javascripts/projects/common/modules/commercial/ad-free-banner.js:
+   6  const messageCode = 'ad-free-banner';
+   7: const image = config.get('images.acquisitions.ad-free', '');
+   8  
+   9  const isInExperiment = () =>
+  10:     config.get('switches.scAdFreeBanner', false);
+  11  
+
+static/src/javascripts/projects/common/modules/commercial/adblock-ask.js:
+  21      !pageShouldHideReaderRevenue() &&
+  22:     !config.get('page.hasShowcaseMainElement');
+  23  
+
+static/src/javascripts/projects/common/modules/commercial/build-page-targeting.js:
+   85  
+   86:     const tests = config.get('tests');
+   87  
+
+  259      const tcfv2EventStatus = latestCMPState.tcfv2 ? latestCMPState.tcfv2.eventStatus : 'na';
+  260:     const page = config.get('page');
+  261      // personalised ads targeting
+
+  269              permutive: getPermutiveSegments(),
+  270:             pv: config.get('ophan.pageViewId'),
+  271              bp: findBreakpoint(),
+
+  284              s: page.section, // for reference in a macro, so cannot be extracted from ad unit
+  285:             rp: config.get('isDotcomRendering', false)
+  286                  ? 'dotcom-rendering'
+
+  288              dcre:
+  289:                 config.get('isDotcomRendering', false) ||
+  290:                 config.get('page.dcrCouldRender', false)
+  291                      ? 't'
+
+static/src/javascripts/projects/common/modules/commercial/commercial-features.js:
+   21          const sensitiveContent =
+   22:             config.get('page.shouldHideAdverts') ||
+   23:             config.get('page.section') === 'childrens-books-site';
+   24:         const isMinuteArticle = config.get('page.isMinuteArticle');
+   25:         const isArticle = config.get('page.contentType') === 'Article';
+   26:         const isInteractive = config.get('page.contentType') === 'Interactive';
+   27:         const isLiveBlog = config.get('page.isLiveBlog');
+   28:         const isHosted = config.get('page.isHosted');
+   29          const isIdentityPage =
+   30:             config.get('page.contentType') === 'Identity' ||
+   31:             config.get('page.section') === 'identity'; // needed for pages under profile.* subdomain
+   32:         const switches = config.get('switches');
+   33          const isWidePage = getBreakpoint() === 'wide';
+
+   37          const newRecipeDesign =
+   38:             config.get('page.showNewRecipeDesign') &&
+   39:             config.get('tests.abNewRecipeDesign');
+   40  
+
+   43              'help/2016/sep/19/how-to-contact-the-guardian-securely',
+   44:         ].includes(config.get('page.pageId', ''));
+   45  
+
+   58              !this.adFree &&
+   59:             !config.get('page.disableStickyTopBanner') &&
+   60              !supportsSticky;
+
+   73              this.articleBodyAdverts &&
+   74:             config.get('switches.carrotTrafficDriver', false) &&
+   75:             !config.get('page.isPaidContent');
+   76  
+
+   82              !isInteractive &&
+   83:             !config.get('page.isFront') &&
+   84:             !config.get('isDotcomRendering', false) &&
+   85              !newRecipeDesign;
+
+   97              !this.isSecureContact &&
+   98:             config.get('switches.redplanetForAus', false);
+   99  
+
+  105              isArticle &&
+  106:             !config.get('page.isPreview') &&
+  107:             config.get('page.showRelatedContent') &&
+  108:             !(isUserLoggedIn() && config.get('page.commentable'));
+  109  
+
+  113              !isMinuteArticle &&
+  114:             config.get('switches.enableDiscussionSwitch') &&
+  115:             config.get('page.commentable') &&
+  116              (!isLiveBlog || isWidePage);
+
+  120  
+  121:         this.paidforBand = config.get('page.isPaidContent') && !supportsSticky;
+  122  
+  123          this.comscore =
+  124:             config.get('switches.comscore', false) &&
+  125              !isIdentityPage &&
+
+static/src/javascripts/projects/common/modules/commercial/contributions-service.js:
+   35  
+   36: const isHosted = config.get('page.isHosted');
+   37  
+
+  108  const buildEpicPayload = async () => {
+  109:     const ophan = config.get('ophan');
+  110:     const page = config.get('page');
+  111  
+
+  148  const buildHeaderLinksPayload = () => {
+  149:     const ophan = config.get('ophan');
+  150      const countryCode = getCountryCode();
+  151:     const edition = config.get('page.edition', '');
+  152      return {
+
+  188  const buildBannerPayload = async () => {
+  189:     const page = config.get('page');
+  190  
+
+  192      const tracking = {
+  193:         ophanPageId: config.get('ophan.pageViewId'),
+  194          platformId: 'GUARDIAN_WEB',
+
+  242  const getStickyBottomBanner = (payload) => {
+  243:     const isProd = config.get('page.isProd');
+  244      const URL = isProd ? 'https://contributions.guardianapis.com/banner' : 'https://contributions.code.dev-guardianapis.com/banner';
+
+  254  const getPuzzlesBanner = (payload) => {
+  255:     const isProd = config.get('page.isProd');
+  256      const URL = isProd ? 'https://contributions.guardianapis.com/puzzles' : 'https://contributions.code.dev-guardianapis.com/puzzles?';
+
+  269  const getHeaderLinks = (payload) => {
+  270:     const isProd = config.get('page.isProd');
+  271      const url = isProd ? 'https://contributions.guardianapis.com/header' : 'https://contributions.code.dev-guardianapis.com/header';
+
+  285      const path = contentType === 'LiveBlog' ? 'liveblog-epic' : 'epic';
+  286:     return config.get('page.isDev') ?
+  287          `https://contributions.code.dev-guardianapis.com/${path}` :
+
+  346  export const fetchPuzzlesData = async () => {
+  347:     const page = config.get('page');
+  348      const payload = await buildBannerPayload();
+  349      const forcePuzzlesBannerTest = isInVariantSynchronous(puzzlesBanner, 'variant');
+  350:     const isPuzzlesBannerSwitchOn = config.get('switches.puzzlesBanner', false);
+  351      const userShouldSeeBanner = forcePuzzlesBannerTest || isPuzzlesBannerSwitchOn;
+
+  464  export const fetchAndRenderEpic = async () => {
+  465:     const page = config.get('page');
+  466  
+
+  495  
+  496:     if (!config.get('switches.remoteHeader', false)) {
+  497          return;
+
+static/src/javascripts/projects/common/modules/commercial/contributions-utilities.js:
+   9  const pageShouldHideReaderRevenue = () =>
+  10:     config.get('page.shouldHideReaderRevenue') ||
+  11:     config.get('page.sponsorshipType') === 'paid-content';
+  12  
+
+static/src/javascripts/projects/common/modules/commercial/reader-revenue-banner.js:
+  12      const forceBanner = window.location.search.includes('force-remote-banner=true');
+  13:     const enabled = config.get('switches.remoteBanner') || forceBanner;
+  14  
+
+static/src/javascripts/projects/common/modules/commercial/user-features.js:
+  121  const requestNewData = () =>
+  122:     fetchJson(`${config.get('page.userAttributesApiUrl')}/me`, {
+  123          mode: 'cors',
+
+  142  const adFreeDataIsOld = () => {
+  143:     const switches = config.get('switches');
+  144      return (
+
+  325      const signedUpForReminder = !!getCookie(CONTRIBUTIONS_REMINDER_SIGNED_UP.name);
+  326:     return config.get('switches.showContributionReminder') && !signedUpForReminder;
+  327  };

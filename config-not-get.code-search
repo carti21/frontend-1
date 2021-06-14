@@ -1,0 +1,351 @@
+# Query: config\\.(?!get)
+# Flags: RegExp
+# Including: static/src/javascripts
+# Excluding: *.spec.*
+# ContextLines: 1
+
+92 results - 24 files
+
+static/src/javascripts/bootstraps/enhanced/article.js:
+  36          if (
+  37:             !config.hasTone('Match reports') &&
+  38              mainColumn[0] &&
+
+static/src/javascripts/bootstraps/enhanced/common.js:
+  126              window.ga = function() {}
+  127:             config.set('page.gaIsInitalised', false)
+  128          }
+
+static/src/javascripts/bootstraps/enhanced/football.js:
+  259              isCompetition() || 'premierleague',
+  260:             config.dateFromSlug()
+  261          );
+
+static/src/javascripts/bootstraps/enhanced/sport.js:
+  56          pageType = 'minbymin';
+  57:     } else if (config.hasTone('Match reports')) {
+  58          pageType = 'report';
+
+static/src/javascripts/lib/config.js:
+  38  const hasTone = (name) =>
+  39:     (config.page.tones || '').includes(name);
+  40  
+  41  const hasSeries = (name) =>
+  42:     (config.page.series || '').includes(name);
+  43  
+  44  const referencesOfType = (name) =>
+  45:     (config.page.references || [])
+  46          .filter(reference => typeof reference[name] !== 'undefined')
+
+  53  const webPublicationDateAsUrlPart = () => {
+  54:     const webPublicationDate = config.page.webPublicationDate;
+  55  
+
+  70  const dateFromSlug = () => {
+  71:     const s = config.page.pageId.match(/\d{4}\/\w{3}\/\d{2}/);
+  72      return s ? s[0] : null;
+
+static/src/javascripts/lib/page.js:
+  23  const isMatch = (yes, no) => {
+  24:     const teams = config.referencesOfType('pa-football-team');
+  25      const match = config.get('page.footballMatch', {});
+
+  29          ['minbymin', config.get('page.isLiveBlog')],
+  30:         ['report', config.hasTone('Match reports')],
+  31:         ['preview', config.hasSeries('Match previews')],
+  32          ['stats', match.id],
+
+  36      Object.assign(match, {
+  37:         date: config.webPublicationDateAsUrlPart(),
+  38          teams,
+
+  63  const isClockwatch = (yes) =>
+  64:     isit(config.hasSeries('Clockwatch'), yes);
+  65  
+
+static/src/javascripts/projects/admin/modules/abtests/abtest-report-item.js:
+   25          if (window.abCharts) {
+   26:             this.chart = window.abCharts[`ab${this.config.test.id}`];
+   27          }
+
+   43          if (this.elem && this.elem instanceof HTMLElement) {
+   44:             this.elem.className += this.config.active
+   45                  ? ' abtest-item--active'
+
+   48                  'data-abtest-name',
+   49:                 this.config && this.config.test && this.config.test.id
+   50              );
+
+   53          bonzo(this.elem).addClass(
+   54:             window.abSwitches[`ab${this.config.test.id}`]
+   55                  ? 'abtest-item--switched-on'
+
+   70          const daysTillExpiry =
+   71:             (Date.parse(this.config.test.expiry) - new Date()) /
+   72              (1000 * 60 * 60 * 24);
+   73          const tableauUrl = `https://tableau-datascience.gutools.co.uk/views/AutomatedMVTDashboard-MkII/MainMVTDashboard?:embed=y&id=${
+   74:             this.config.test.id
+   75          }`;
+   76          const ophanUrl = `https://dashboard.ophan.co.uk/graph/breakdown?ab=${
+   77:             this.config.test.id
+   78          }`;
+
+   80          if (elements.description) {
+   81:             elements.description.textContent = this.config.test.description;
+   82          }
+
+   84          if (elements.name) {
+   85:             elements.name.textContent = this.config.test.id;
+   86          }
+
+   95          if (elements.expiry) {
+   96:             elements.expiry.setAttribute('title', this.config.test.expiry);
+   97          }
+
+   99          if (elements.audience) {
+  100:             elements.audience.textContent = `${this.config.test.audience *
+  101                  100}%`;
+
+  104          if (elements.audienceOffset) {
+  105:             elements.audienceOffset.textContent = `${this.config.test
+  106                  .audienceOffset * 100}%`;
+
+  117          if (elements.hypothesis) {
+  118:             elements.hypothesis.textContent = this.config.test.hypothesis || '';
+  119          }
+
+  122              const participation = new Participation({
+  123:                 test: this.config.test,
+  124              });
+
+static/src/javascripts/projects/admin/modules/abtests/audience-item.js:
+  31          if (testLabel) {
+  32:             bonzo(testLabel).prepend(this.config.test.id);
+  33          }
+
+  35          // Set the width and absolute position to match the audience size and offset.
+  36:         const audience = this.config.test.audience * 100;
+  37:         const audienceOffset = this.config.test.audienceOffset * 100;
+  38          const audienceEnd = audience + audienceOffset;
+
+  45          if (captionTest) {
+  46:             bonzo(captionTest).append(this.config.test.id);
+  47          }
+
+static/src/javascripts/projects/admin/modules/abtests/audience.js:
+  27  
+  28:         this.config.tests.forEach(test => {
+  29              new AudienceItem({
+
+static/src/javascripts/projects/admin/modules/abtests/participation-item.js:
+  30              : document.location.origin;
+  31:         const href = `${this.config.examplePath}=${this.config.variant}`;
+  32  
+  33          if (this.elem instanceof HTMLAnchorElement) {
+  34:             this.elem.textContent = this.config.variant;
+  35              this.elem.href = origin + href;
+
+static/src/javascripts/projects/admin/modules/abtests/participation.js:
+  25      prerender() {
+  26:         const test = this.config.test;
+  27          const origin = /gutools.co.uk$/.test(document.location.origin)
+
+static/src/javascripts/projects/commercial/commercial-metrics.ts:
+  5  // This is really a hacky workaround ⚠️
+  6: // TODO convert config.js to TypeScript
+  7  const config = config_ as {
+
+static/src/javascripts/projects/commercial/modules/brazeBanner.js:
+  53      pageConfig,
+  54: }) => Boolean(userIsGuSupporter && !pageConfig.isPaidContent);
+  55  
+
+static/src/javascripts/projects/commercial/modules/ad-verification/prepare-ad-verification.js:
+  14          return loadScript(
+  15:             `//${host}/7oDgiTsq88US4rrBG0_Nxpafkrg/gpt_and_prebid/config.js`,
+  16              { async: true }
+
+static/src/javascripts/projects/commercial/modules/dfp/load-advert.js:
+  15          // No point forcing a size, as there is already only one
+  16:         // possible (mobile/tablet). See prebid/slot-config.js
+  17          return [hbSlot];
+
+static/src/javascripts/projects/commercial/modules/dfp/prepare-permutive.js:
+   84      if (
+   85:         typeof pageConfig.ophan === 'object' &&
+   86:         typeof pageConfig.ophan.browserId === 'string' &&
+   87:         pageConfig.ophan.browserId.length > 0
+   88      ) {
+   89:         return [{ tag: 'ophan', id: pageConfig.ophan.browserId }];
+   90      }
+
+  130                      (e.config = i || {}),
+  131:                     (e.config.projectId = o),
+  132:                     (e.config.apiKey = r),
+  133:                     (e.config.environment =
+  134:                         e.config.environment || 'production');
+  135                  for (
+
+static/src/javascripts/projects/commercial/modules/dfp/render-advert.ts:
+  35  					// mark: 9473ae05-a901-4a8d-a51d-1b9c894d6e1f
+  36: 					// Temporary typing until config.js is converted to TypeScript
+  37  					const isDotcomRendering: boolean = (config as {
+
+static/src/javascripts/projects/commercial/modules/header-bidding/prebid/prebid.js:
+  77      if(config.get('switches.consentManagement', false)) {
+  78:         pbjsConfig.consentManagement = consentManagement()
+  79      }
+
+  84  	) {
+  85: 		pbjsConfig.realTimeData = {
+  86  			dataProviders: [
+
+static/src/javascripts/projects/common/modules/atoms/youtube-player.js:
+  136      if (ccpaStateFlag === null) {
+  137:         adsConfig.nonPersonalizedAd = !tcfStateFlag;
+  138      } else {
+  139:         adsConfig.restrictedDataProcessor = ccpaStateFlag;
+  140      }
+
+static/src/javascripts/projects/common/modules/commercial/contributions-service.js:
+  123          shouldHideReaderRevenue: page.shouldHideReaderRevenue,
+  124:         isMinuteArticle: config.hasTone('Minute'),
+  125          isPaidContent: page.isPaidContent,
+
+static/src/javascripts/projects/common/modules/identity/formstack-iframe-embed.js:
+  124  
+  125:         this.el.classList.remove(this.config.idClasses.hide);
+  126  
+
+  136          const form = (document.getElementById(
+  137:             this.config.fsSelectors.form
+  138          ));
+
+  147          // loop their selectors and add our own classes instead
+  148:         this.form.classList.add(this.config.idClasses.form);
+  149  
+
+  155  
+  156:         Object.keys(this.config.fsSelectors).forEach(key => {
+  157:             const selector = this.config.fsSelectors[key];
+  158              const elems = Array.from(this.form.querySelectorAll(selector));
+  159:             const classNames = this.config.idClasses[key].split(' ');
+  160  
+
+  170          const userId = this.form.querySelector(
+  171:             this.config.hiddenSelectors.userId
+  172          );
+
+  180          const email = this.form.querySelector(
+  181:             this.config.hiddenSelectors.email
+  182          );
+
+  238              // Remove any existing errors
+  239:             const formErrorClass = this.config.idClasses.formError;
+  240              const formErrors = Array.from(
+
+  247  
+  248:             const fieldErrorClass = this.config.idClasses.fieldError;
+  249              const fieldErrors = Array.from(
+
+  257              // Handle new errors
+  258:             const fsFormErrorClass = this.config.fsSelectors.formError;
+  259              const fsFormErrors = Array.from(
+
+  266  
+  267:             const fsFieldErrorClass = this.config.fsSelectors.fieldError;
+  268              const fsFieldErrors = Array.from(
+
+  277              const textAreas = Array.from(
+  278:                 this.el.querySelectorAll(this.config.fsSelectors.textArea)
+  279              );
+
+static/src/javascripts/projects/common/modules/identity/formstack.js:
+   61      postMessage(message) {
+   62:         const domain = this.config.page.idUrl;
+   63  
+
+   76  
+   77:         this.el.classList.remove(this.config.idClasses.hide);
+   78  
+
+   88          const form = (document.getElementById(
+   89:             this.config.fsSelectors.form
+   90          ));
+
+   99          // loop their selectors and add our own classes instead
+  100:         this.form.classList.add(this.config.idClasses.form);
+  101  
+
+  107  
+  108:         Object.keys(this.config.fsSelectors).forEach(key => {
+  109:             const selector = this.config.fsSelectors[key];
+  110              const elems = Array.from(this.form.querySelectorAll(selector));
+  111:             const classNames = this.config.idClasses[key].split(' ');
+  112  
+
+  122          const userId = this.form.querySelector(
+  123:             this.config.hiddenSelectors.userId
+  124          );
+
+  132          const email = this.form.querySelector(
+  133:             this.config.hiddenSelectors.email
+  134          );
+
+  174              // Remove any existing errors
+  175:             const formErrorClass = this.config.idClasses.formError;
+  176              const formErrors = Array.from(
+
+  183  
+  184:             const fieldErrorClass = this.config.idClasses.fieldError;
+  185              const fieldErrors = Array.from(
+
+  193              // Handle new errors
+  194:             const fsFormErrorClass = this.config.fsSelectors.formError;
+  195              const fsFormErrors = Array.from(
+
+  202  
+  203:             const fsFieldErrorClass = this.config.fsSelectors.fieldError;
+  204              const fsFieldErrors = Array.from(
+
+  213              const textAreas = Array.from(
+  214:                 this.el.querySelectorAll(this.config.fsSelectors.textArea)
+  215              );
+
+static/src/javascripts/projects/common/modules/navigation/profile.js:
+  29              this.dom.container = document.body.getElementsByClassName(
+  30:                 CONFIG.classes.container
+  31              )[0];
+
+  34                  this.dom.content = this.dom.container.getElementsByClassName(
+  35:                     CONFIG.classes.content
+  36                  )[0];
+
+  41              this.dom.popup = document.body.getElementsByClassName(
+  42:                 CONFIG.classes.popup
+  43              )[0];
+
+  47              this.dom.register = document.body.getElementsByClassName(
+  48:                 CONFIG.classes.register
+  49              )[0];
+
+  53              this.dom.commentActivity = document.body.getElementsByClassName(
+  54:                 CONFIG.classes.commentActivity
+  55              )[0];
+
+static/src/javascripts/projects/common/modules/onward/history.js:
+  355  
+  356:     if (!pageConfig.isFront) {
+  357          history = getHistory().filter(item => {
+
+  372      const summary = pruneSummary(getSummary(), mockToday);
+  373:     const page = collapsePath(pageConfig.pageId);
+  374      let isFront = false;
+
+  478  const incrementDailyArticleCount = (pageConfig) => {
+  479:     if (!pageConfig.isFront && !getCookie(ARTICLES_VIEWED_OPT_OUT_COOKIE.name)) {
+  480          const dailyCount = storage.local.get(storageKeyDailyArticleCount) || [];
+
+  502  const incrementWeeklyArticleCount = (pageConfig) => {
+  503:     if (!pageConfig.isFront && !getCookie(ARTICLES_VIEWED_OPT_OUT_COOKIE.name)) {
+  504          const weeklyArticleCount =
