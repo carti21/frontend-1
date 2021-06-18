@@ -1,4 +1,5 @@
 import { sendCommercialMetrics } from '@guardian/commercial-core';
+import { getSwitches } from '@guardian/libs';
 import config_ from '../../lib/config';
 
 // This is really a hacky workaround ⚠️
@@ -11,9 +12,9 @@ let logged = false;
 
 const isDev = Boolean(config.get('page.isDev', false));
 
-const init = (): void => {
+const init = async (): Promise<void> => {
 	if (!window.guardian.ophan) return;
-	if (!config.get('switches.commercialMetrics', false)) return;
+	if (!(await getSwitches()).commercialMetrics) return;
 
 	const userIsInSamplingGroup = Math.random() <= 0.01;
 	const pageViewId = window.guardian.ophan.pageViewId;

@@ -4,25 +4,16 @@
 # Excluding: *.spec.*
 # ContextLines: 1
 
-152 results - 45 files
+150 results - 44 files
 
 static/src/javascripts/projects/commercial/commercial-metrics.ts:
-  11  
-  12: const isDev = Boolean(config.get('page.isDev', false));
-  13  
+  12  
+  13: const isDev = Boolean(config.get('page.isDev', false));
+  14  
 
-  15  	if (!window.guardian.ophan) return;
-  16: 	if (!config.get('switches.commercialMetrics', false)) return;
-  17  
-
-  19  	const pageViewId = window.guardian.ophan.pageViewId;
-  20: 	const browserId = config.get('ophan.browserId') as string | undefined;
-  21  
-
-static/src/javascripts/projects/commercial/sentinel.ts:
-  27  	// The function will return early if the sentinelLogger switch is disabled.
-  28: 	if (!config.get('switches.sentinelLogger', false)) return;
-  29  
+  20  	const pageViewId = window.guardian.ophan.pageViewId;
+  21: 	const browserId = config.get('ophan.browserId') as string | undefined;
+  22  
 
 static/src/javascripts/projects/commercial/modules/article-aside-adverts.ts:
   74  			// we do all the adjustments server-side if the page has a ShowcaseMainElement!

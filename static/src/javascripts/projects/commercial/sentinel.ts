@@ -1,10 +1,7 @@
+import { getSwitches } from '@guardian/libs';
 import raven from 'lib/raven';
-import config_ from '../../lib/config';
 
-// This is really a hacky workaround ⚠️
-const config = config_ as {
-	get: (s: string, d: boolean) => boolean;
-};
+const switches = await getSwitches();
 
 /**
  * This function is used to send a logging event to Sentry.
@@ -25,7 +22,7 @@ export const amIUsed = (
 	label?: string,
 ): void => {
 	// The function will return early if the sentinelLogger switch is disabled.
-	if (!config.get('switches.sentinelLogger', false)) return;
+	if (!switches.commercialMetrics) return;
 
 	const functionToCheck = [moduleName, functionName, label]
 		.filter(Boolean)
