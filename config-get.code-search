@@ -4,7 +4,7 @@
 # Excluding: *.spec.*
 # ContextLines: 1
 
-150 results - 44 files
+144 results - 44 files
 
 static/src/javascripts/projects/commercial/commercial-metrics.ts:
   12  
@@ -25,10 +25,6 @@ static/src/javascripts/projects/commercial/modules/article-aside-adverts.ts:
   82  				return fastdom.mutate(() => {
 
 static/src/javascripts/projects/commercial/modules/article-body-adverts.js:
-   15  
-   16: const isPaidContent = config.get('page.isPaidContent', false);
-   17  
-
    68  
    69: const isDotcomRendering = config.get('isDotcomRendering', false);
    70  const articleBodySelector = isDotcomRendering ? '.article-body-commercial-selector' : '.js-article__body';
@@ -47,10 +43,6 @@ static/src/javascripts/projects/commercial/modules/brazeBanner.js:
   184:     const apiKey = config.get('page.brazeApiKey');
   185      const isBrazeConfigured = brazeSwitch && apiKey;
 
-  198      // Don't load Braze SDK for paid content
-  199:     if (config.get('page').isPaidContent) {
-  200          return false;
-
 static/src/javascripts/projects/commercial/modules/carrot-traffic-driver.ts:
   50  
   51: const isDotcomRendering = config.get('isDotcomRendering', false) as boolean;
@@ -68,13 +60,9 @@ static/src/javascripts/projects/commercial/modules/comscore.js:
   40          );
 
 static/src/javascripts/projects/commercial/modules/high-merch.js:
-   7      if (commercialFeatures.highMerch) {
-   8:         const anchorSelector = config.get('page.commentable')
-   9              ? '#comments + *'
-
-  15          const slots = createSlots(
-  16:             config.get('page.isPaidContent') ? 'high-merch-paid' : 'high-merch'
-  17          );
+  7      if (commercialFeatures.highMerch) {
+  8:         const anchorSelector = config.get('page.commentable')
+  9              ? '#comments + *'
 
 static/src/javascripts/projects/commercial/modules/ipsos-mori.js:
   18      };
@@ -94,10 +82,6 @@ static/src/javascripts/projects/commercial/modules/sticky-mpu.js:
   75          !adSlot ||
   76:         config.get('page.hasShowcaseMainElement')
   77      ) {
-
-  90                  // if there is a sticky 'paid by' band move the sticky mpu down so it will be always visible
-  91:                 const options = config.get('page.isPaidContent')
-  92                      ? {
 
 static/src/javascripts/projects/commercial/modules/third-party-tags.js:
   82      const advertisingServices = [
@@ -417,8 +401,7 @@ static/src/javascripts/projects/common/modules/commercial/commercial-features.js
 
    73              this.articleBodyAdverts &&
    74:             config.get('switches.carrotTrafficDriver', false) &&
-   75:             !config.get('page.isPaidContent');
-   76  
+   75              !window.guardian.config.commercial.isPaidContent;
 
    82              !isInteractive &&
    83:             !config.get('page.isFront') &&
@@ -440,9 +423,6 @@ static/src/javascripts/projects/common/modules/commercial/commercial-features.js
   115:             config.get('page.commentable') &&
   116              (!isLiveBlog || isWidePage);
 
-  120  
-  121:         this.paidforBand = config.get('page.isPaidContent') && !supportsSticky;
-  122  
   123          this.comscore =
   124:             config.get('switches.comscore', false) &&
   125              !isIdentityPage &&
@@ -455,52 +435,52 @@ static/src/javascripts/projects/common/modules/commercial/contributions-service.
   109  const buildEpicPayload = async () => {
   110:     const ophan = config.get('ophan');
   111:     const page = config.get('page');
-  112  
+  112      const commercial = window.guardian.config.commercial
 
-  149  const buildHeaderLinksPayload = () => {
-  150:     const ophan = config.get('ophan');
-  151      const countryCode = getCountryCode();
-  152:     const edition = config.get('page.edition', '');
-  153      return {
+  150  const buildHeaderLinksPayload = () => {
+  151:     const ophan = config.get('ophan');
+  152      const countryCode = getCountryCode();
+  153:     const edition = config.get('page.edition', '');
+  154      return {
 
-  190  const buildBannerPayload = async () => {
-  191:     const page = config.get('page');
-  192  
+  191  const buildBannerPayload = async () => {
+  192:     const page = config.get('page');
+  193      const commercial = window.guardian.config.commercial
 
-  194      const tracking = {
-  195:         ophanPageId: config.get('ophan.pageViewId'),
-  196          platformId: 'GUARDIAN_WEB',
+  196      const tracking = {
+  197:         ophanPageId: config.get('ophan.pageViewId'),
+  198          platformId: 'GUARDIAN_WEB',
 
-  244  const getStickyBottomBanner = (payload) => {
-  245:     const isProd = config.get('page.isProd');
-  246      const URL = isProd ? 'https://contributions.guardianapis.com/banner' : 'https://contributions.code.dev-guardianapis.com/banner';
+  246  const getStickyBottomBanner = (payload) => {
+  247:     const isProd = config.get('page.isProd');
+  248      const URL = isProd ? 'https://contributions.guardianapis.com/banner' : 'https://contributions.code.dev-guardianapis.com/banner';
 
-  256  const getPuzzlesBanner = (payload) => {
-  257:     const isProd = config.get('page.isProd');
-  258      const URL = isProd ? 'https://contributions.guardianapis.com/puzzles' : 'https://contributions.code.dev-guardianapis.com/puzzles?';
+  258  const getPuzzlesBanner = (payload) => {
+  259:     const isProd = config.get('page.isProd');
+  260      const URL = isProd ? 'https://contributions.guardianapis.com/puzzles' : 'https://contributions.code.dev-guardianapis.com/puzzles?';
 
-  271  const getHeaderLinks = (payload) => {
-  272:     const isProd = config.get('page.isProd');
-  273      const url = isProd ? 'https://contributions.guardianapis.com/header' : 'https://contributions.code.dev-guardianapis.com/header';
+  273  const getHeaderLinks = (payload) => {
+  274:     const isProd = config.get('page.isProd');
+  275      const url = isProd ? 'https://contributions.guardianapis.com/header' : 'https://contributions.code.dev-guardianapis.com/header';
 
-  287      const path = contentType === 'LiveBlog' ? 'liveblog-epic' : 'epic';
-  288:     return config.get('page.isDev') ?
-  289          `https://contributions.code.dev-guardianapis.com/${path}` :
+  289      const path = contentType === 'LiveBlog' ? 'liveblog-epic' : 'epic';
+  290:     return config.get('page.isDev') ?
+  291          `https://contributions.code.dev-guardianapis.com/${path}` :
 
-  348  export const fetchPuzzlesData = async () => {
-  349:     const page = config.get('page');
-  350      const payload = await buildBannerPayload();
-  351      const forcePuzzlesBannerTest = isInVariantSynchronous(puzzlesBanner, 'variant');
-  352:     const isPuzzlesBannerSwitchOn = config.get('switches.puzzlesBanner', false);
-  353      const userShouldSeeBanner = forcePuzzlesBannerTest || isPuzzlesBannerSwitchOn;
+  350  export const fetchPuzzlesData = async () => {
+  351:     const page = config.get('page');
+  352      const payload = await buildBannerPayload();
+  353      const forcePuzzlesBannerTest = isInVariantSynchronous(puzzlesBanner, 'variant');
+  354:     const isPuzzlesBannerSwitchOn = config.get('switches.puzzlesBanner', false);
+  355      const userShouldSeeBanner = forcePuzzlesBannerTest || isPuzzlesBannerSwitchOn;
 
-  466  export const fetchAndRenderEpic = async () => {
-  467:     const page = config.get('page');
-  468  
+  468  export const fetchAndRenderEpic = async () => {
+  469:     const page = config.get('page');
+  470  
 
-  497  
-  498:     if (!config.get('switches.remoteHeader', false)) {
-  499          return;
+  499  
+  500:     if (!config.get('switches.remoteHeader', false)) {
+  501          return;
 
 static/src/javascripts/projects/common/modules/commercial/contributions-utilities.js:
    9  const pageShouldHideReaderRevenue = () =>
