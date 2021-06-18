@@ -448,59 +448,59 @@ static/src/javascripts/projects/common/modules/commercial/commercial-features.js
   125              !isIdentityPage &&
 
 static/src/javascripts/projects/common/modules/commercial/contributions-service.js:
-   35  
-   36: const isHosted = config.get('page.isHosted');
-   37  
+   36  
+   37: const isHosted = config.get('page.isHosted');
+   38  
 
-  108  const buildEpicPayload = async () => {
-  109:     const ophan = config.get('ophan');
-  110:     const page = config.get('page');
-  111  
+  109  const buildEpicPayload = async () => {
+  110:     const ophan = config.get('ophan');
+  111:     const page = config.get('page');
+  112  
 
-  148  const buildHeaderLinksPayload = () => {
-  149:     const ophan = config.get('ophan');
-  150      const countryCode = getCountryCode();
-  151:     const edition = config.get('page.edition', '');
-  152      return {
+  149  const buildHeaderLinksPayload = () => {
+  150:     const ophan = config.get('ophan');
+  151      const countryCode = getCountryCode();
+  152:     const edition = config.get('page.edition', '');
+  153      return {
 
-  188  const buildBannerPayload = async () => {
-  189:     const page = config.get('page');
-  190  
+  190  const buildBannerPayload = async () => {
+  191:     const page = config.get('page');
+  192  
 
-  192      const tracking = {
-  193:         ophanPageId: config.get('ophan.pageViewId'),
-  194          platformId: 'GUARDIAN_WEB',
+  194      const tracking = {
+  195:         ophanPageId: config.get('ophan.pageViewId'),
+  196          platformId: 'GUARDIAN_WEB',
 
-  242  const getStickyBottomBanner = (payload) => {
-  243:     const isProd = config.get('page.isProd');
-  244      const URL = isProd ? 'https://contributions.guardianapis.com/banner' : 'https://contributions.code.dev-guardianapis.com/banner';
+  244  const getStickyBottomBanner = (payload) => {
+  245:     const isProd = config.get('page.isProd');
+  246      const URL = isProd ? 'https://contributions.guardianapis.com/banner' : 'https://contributions.code.dev-guardianapis.com/banner';
 
-  254  const getPuzzlesBanner = (payload) => {
-  255:     const isProd = config.get('page.isProd');
-  256      const URL = isProd ? 'https://contributions.guardianapis.com/puzzles' : 'https://contributions.code.dev-guardianapis.com/puzzles?';
+  256  const getPuzzlesBanner = (payload) => {
+  257:     const isProd = config.get('page.isProd');
+  258      const URL = isProd ? 'https://contributions.guardianapis.com/puzzles' : 'https://contributions.code.dev-guardianapis.com/puzzles?';
 
-  269  const getHeaderLinks = (payload) => {
-  270:     const isProd = config.get('page.isProd');
-  271      const url = isProd ? 'https://contributions.guardianapis.com/header' : 'https://contributions.code.dev-guardianapis.com/header';
+  271  const getHeaderLinks = (payload) => {
+  272:     const isProd = config.get('page.isProd');
+  273      const url = isProd ? 'https://contributions.guardianapis.com/header' : 'https://contributions.code.dev-guardianapis.com/header';
 
-  285      const path = contentType === 'LiveBlog' ? 'liveblog-epic' : 'epic';
-  286:     return config.get('page.isDev') ?
-  287          `https://contributions.code.dev-guardianapis.com/${path}` :
+  287      const path = contentType === 'LiveBlog' ? 'liveblog-epic' : 'epic';
+  288:     return config.get('page.isDev') ?
+  289          `https://contributions.code.dev-guardianapis.com/${path}` :
 
-  346  export const fetchPuzzlesData = async () => {
-  347:     const page = config.get('page');
-  348      const payload = await buildBannerPayload();
-  349      const forcePuzzlesBannerTest = isInVariantSynchronous(puzzlesBanner, 'variant');
-  350:     const isPuzzlesBannerSwitchOn = config.get('switches.puzzlesBanner', false);
-  351      const userShouldSeeBanner = forcePuzzlesBannerTest || isPuzzlesBannerSwitchOn;
+  348  export const fetchPuzzlesData = async () => {
+  349:     const page = config.get('page');
+  350      const payload = await buildBannerPayload();
+  351      const forcePuzzlesBannerTest = isInVariantSynchronous(puzzlesBanner, 'variant');
+  352:     const isPuzzlesBannerSwitchOn = config.get('switches.puzzlesBanner', false);
+  353      const userShouldSeeBanner = forcePuzzlesBannerTest || isPuzzlesBannerSwitchOn;
 
-  464  export const fetchAndRenderEpic = async () => {
-  465:     const page = config.get('page');
-  466  
+  466  export const fetchAndRenderEpic = async () => {
+  467:     const page = config.get('page');
+  468  
 
-  495  
-  496:     if (!config.get('switches.remoteHeader', false)) {
-  497          return;
+  497  
+  498:     if (!config.get('switches.remoteHeader', false)) {
+  499          return;
 
 static/src/javascripts/projects/common/modules/commercial/contributions-utilities.js:
    9  const pageShouldHideReaderRevenue = () =>
@@ -522,6 +522,6 @@ static/src/javascripts/projects/common/modules/commercial/user-features.js:
   143:     const switches = config.get('switches');
   144      return (
 
-  325      const signedUpForReminder = !!getCookie(CONTRIBUTIONS_REMINDER_SIGNED_UP.name);
-  326:     return config.get('switches.showContributionReminder') && !signedUpForReminder;
-  327  };
+  340      const signedUpForReminder = !!getCookie(CONTRIBUTIONS_REMINDER_SIGNED_UP.name);
+  341:     return config.get('switches.showContributionReminder') && !signedUpForReminder;
+  342  };
