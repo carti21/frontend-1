@@ -72,7 +72,7 @@ class CommercialFeatures {
             !this.adFree &&
             this.articleBodyAdverts &&
             config.get('switches.carrotTrafficDriver', false) &&
-            !config.get('page.isPaidContent');
+            !window.guardian.config.page.isPaidContent;
 
         this.highMerch =
             this.dfpAdvertising &&
@@ -118,7 +118,7 @@ class CommercialFeatures {
         this.liveblogAdverts =
             isLiveBlog && this.dfpAdvertising && !this.adFree;
 
-        this.paidforBand = config.get('page.isPaidContent') && !supportsSticky;
+        this.paidforBand = window.guardian.config.page.isPaidContent && !supportsSticky;
 
         this.comscore =
             config.get('switches.comscore', false) &&

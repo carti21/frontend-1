@@ -109,6 +109,7 @@ export const getArticleCountConsent = () => {
 const buildEpicPayload = async () => {
     const ophan = config.get('ophan');
     const page = config.get('page');
+    const pageTyped = window.guardian.config.page
 
     const countryCode = getCountryCode();
 
@@ -125,7 +126,7 @@ const buildEpicPayload = async () => {
         sectionName: page.section,
         shouldHideReaderRevenue: page.shouldHideReaderRevenue,
         isMinuteArticle: config.hasTone('Minute'),
-        isPaidContent: page.isPaidContent,
+        isPaidContent: pageTyped.isPaidContent ?? false,
         isSensitive: page.isSensitive,
         tags: buildKeywordTags(page),
         showSupportMessaging: !shouldHideSupportMessaging(),
@@ -189,6 +190,7 @@ export const setLocalNoBannerCachePeriod = () =>
 
 const buildBannerPayload = async () => {
     const page = config.get('page');
+    const commercial = window.guardian.config.commercial
 
     // TODO: Review whether we need to send all of this in the payload to the server
     const tracking = {
@@ -201,7 +203,7 @@ const buildBannerPayload = async () => {
     const targeting = {
         alreadyVisitedCount: getVisitCount(),
         shouldHideReaderRevenue: page.shouldHideReaderRevenue,
-        isPaidContent: page.isPaidContent,
+        isPaidContent: commercial.isPaidContent ?? false,
         showSupportMessaging: !shouldHideSupportMessaging(),
         engagementBannerLastClosedAt: userPrefs.get('engagementBannerLastClosedAt') || undefined,
         subscriptionBannerLastClosedAt: userPrefs.get('subscriptionBannerLastClosedAt') || undefined,

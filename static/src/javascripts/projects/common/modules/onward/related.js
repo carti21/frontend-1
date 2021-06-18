@@ -59,7 +59,7 @@ const popularInTagOverride = () => {
         [...new Set(a)].filter(_ => new Set(b).has(_));
     const pageTags = config.get('page.keywordIds', '').split(',');
     // if this is an advertisement feature, use the page's keyword (there'll only be one)
-    const popularInTags = config.get('page.isPaidContent')
+    const popularInTags = window.guardian.config.page.isPaidContent
         ? pageTags
         : intersect(whitelistedTags, pageTags);
 
@@ -74,7 +74,7 @@ const related = (opts) => {
     let componentName;
 
     const shouldHideForAdFree =
-        commercialFeatures.adFree && config.get('page.isPaidContent');
+        commercialFeatures.adFree && (window.guardian.config.page.isPaidContent ?? false );
 
     if (config.get('page.hasStoryPackage')) {
         const expandable =

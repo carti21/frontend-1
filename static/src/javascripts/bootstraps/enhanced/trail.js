@@ -18,9 +18,9 @@ import { onwardAudio } from 'common/modules/audio/onward-container';
 import { moreInSeriesContainerInit } from 'common/modules/video/more-in-series-container';
 
 const initMoreInSection = () => {
+    const isPaidContent = window.guardian.config.page.isPaidContent ?? false;
     const {
         showRelatedContent,
-        isPaidContent,
         section,
         shortUrl,
         seriesId,

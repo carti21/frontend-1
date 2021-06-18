@@ -95,3 +95,20 @@ type GuAdSize = {
 	height: number;
 	toString: (_: void) => string;
 };
+
+// Guardian Config
+
+interface CommercialConfigType {
+	isPaidContent?: boolean; // whether the content is “Paid for by”
+	pageId: string; // The path-relative url → info/2019/apr/04/revisiting-the-rendering-tier
+	webPublicationDate?: number; // UNIX Timestamp in UTC?
+	headline?: string;
+	author?: string;
+	keywords?: string; // comma-separated array → info/info,uk/uk
+	section?: string; // uk-news
+	edition?: string; // UK
+	series?: string;
+	toneIds?: string; // comma-separated array → tone/news
+	contentType: string;
+	ampIframeUrl: string; // https://assets.guim.co.uk/data/vendor/…/amp-iframe.html
+}

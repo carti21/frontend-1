@@ -13,7 +13,7 @@ import { initCarrot } from './carrot-traffic-driver';
 
 
 
-const isPaidContent = config.get('page.isPaidContent', false);
+const isPaidContent = window.guardian.config.page.isPaidContent ?? false;
 
 const adSlotClassSelectorSizes = {
     minAbove: 500,

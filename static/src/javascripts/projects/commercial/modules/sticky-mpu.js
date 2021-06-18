@@ -88,7 +88,7 @@ const stickyMpu = (adSlot) => {
         .then(() => {
             if (noSticky) {
                 // if there is a sticky 'paid by' band move the sticky mpu down so it will be always visible
-                const options = config.get('page.isPaidContent')
+                const options = window.guardian.config.page.isPaidContent
                     ? {
                           top: 43,
                       }

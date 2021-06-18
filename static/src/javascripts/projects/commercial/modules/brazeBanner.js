@@ -196,7 +196,7 @@ const canShow = async () => {
     }
 
     // Don't load Braze SDK for paid content
-    if (config.get('page').isPaidContent) {
+    if (window.guardian.config.page.isPaidContent) {
         return false;
     }
 

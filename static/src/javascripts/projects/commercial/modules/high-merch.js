@@ -13,7 +13,7 @@ export const init = () => {
 
         container.className = 'fc-container fc-container--commercial';
         const slots = createSlots(
-            config.get('page.isPaidContent') ? 'high-merch-paid' : 'high-merch'
+            window.guardian.config.page.isPaidContent ? 'high-merch-paid' : 'high-merch'
         );
 
         slots.forEach(slot => {

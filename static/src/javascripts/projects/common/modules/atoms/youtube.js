@@ -244,7 +244,7 @@ const getIFrameBehaviourConfig = (
     const isUSContent =
         config.get('page.productionOffice', '').toLowerCase() === 'us';
 
-    const isPaidContent = config.get('page.isPaidContent');
+    const isPaidContent =  window.guardian.config.page.isPaidContent ?? false;
 
     return {
         isAutoplayBlockingPlatform,
@@ -269,7 +269,7 @@ const getIFrameBehaviour = (
         isVideoArticle,
         isFront,
         isUSContent,
-        isPaidContent,
+        isPaidContent, // TODO: fix this
     } = iframeConfig;
 
     const isUsPaidContentVideo =
